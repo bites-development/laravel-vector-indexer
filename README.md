@@ -21,20 +21,16 @@ Automatic vector indexing and semantic search for Laravel models using OpenAI em
 composer require bites/laravel-vector-indexer
 ```
 
-### 2. Publish Assets (Optional)
+### 2. Publish Config (Optional)
 
-The package will work without publishing, but you can publish config and migrations if you need to customize them:
+The package config has sensible defaults. Only publish if you need to customize settings:
 
 ```bash
-# Publish config (optional - has sensible defaults)
+# Publish config (optional)
 php artisan vendor:publish --tag=vector-indexer-config
-
-# Publish migrations (optional - auto-loaded from package)
-php artisan vendor:publish --tag=vector-indexer-migrations
-
-# Or publish everything at once
-php artisan vendor:publish --provider="Bites\VectorIndexer\Providers\VectorIndexerServiceProvider"
 ```
+
+**Note:** Migrations are auto-loaded from the package. Do NOT publish them unless you need to modify the schema.
 
 ### 3. Run Migrations
 

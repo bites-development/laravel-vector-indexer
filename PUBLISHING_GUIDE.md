@@ -6,17 +6,18 @@ The Laravel Vector Indexer package provides publishable assets that you can cust
 
 ## What Can Be Published?
 
-### 1. Configuration File
+### 1. Configuration File ✅ Recommended
 - **Tag:** `vector-indexer-config`
 - **Source:** `packages/bites/laravel-vector-indexer/config/vector-indexer.php`
 - **Destination:** `config/vector-indexer.php`
 - **Purpose:** Customize OpenAI, Qdrant, chunking, and queue settings
 
-### 2. Migrations
+### 2. Migrations ⚠️ NOT Recommended
 - **Tag:** `vector-indexer-migrations`
 - **Source:** `packages/bites/laravel-vector-indexer/database/migrations/`
 - **Destination:** `database/migrations/`
-- **Purpose:** Modify database schema if needed
+- **Purpose:** Modify database schema (advanced use only)
+- **⚠️ Warning:** Migrations are auto-loaded from the package. Only publish if you need to modify the schema.
 
 ## Publishing Commands
 
@@ -31,9 +32,12 @@ php artisan vendor:publish --tag=vector-indexer-config
 Copying file [packages/.../config/vector-indexer.php] to [config/vector-indexer.php]
 ```
 
-### Publish Migrations Only
+### Publish Migrations (Advanced Only)
+
+⚠️ **Not recommended** - Migrations auto-load from the package.
 
 ```bash
+# Only if you need to modify the schema
 php artisan vendor:publish --tag=vector-indexer-migrations
 ```
 
@@ -42,15 +46,7 @@ php artisan vendor:publish --tag=vector-indexer-migrations
 Copying directory [packages/.../database/migrations] to [database/migrations]
 ```
 
-### Publish Everything
-
-```bash
-php artisan vendor:publish --provider="Bites\VectorIndexer\Providers\VectorIndexerServiceProvider"
-```
-
-**Result:**
-- Config file published
-- All migrations published
+**Important:** After publishing migrations, you'll need to maintain them separately from the package.
 
 ### Force Re-publish
 
@@ -62,7 +58,7 @@ php artisan vendor:publish --tag=vector-indexer-migrations --force
 
 ## Do You Need to Publish?
 
-### ✅ You DON'T Need to Publish If:
+### ✅ You DON'T Need to Publish Anything If:
 
 - Using default OpenAI model (`text-embedding-3-large`)
 - Using default Qdrant settings
@@ -80,12 +76,17 @@ php artisan vendor:publish --tag=vector-indexer-migrations --force
 - Need different queue settings
 - Want to customize auto-indexing behavior
 
-### 🗄️ You SHOULD Publish Migrations If:
+### 🗄️ You Should RARELY Publish Migrations
 
-- Need to add custom columns to vector tables
-- Want to modify indexes
-- Need to adjust table names
-- Want to add custom constraints
+⚠️ **Migrations auto-load from the package** - publishing is not needed!
+
+Only publish migrations if you need to:
+- Add custom columns to vector tables
+- Modify indexes for your specific use case
+- Adjust table names (not recommended)
+- Add custom constraints
+
+**Warning:** Published migrations require manual maintenance when the package updates.
 
 ## Configuration Options
 
