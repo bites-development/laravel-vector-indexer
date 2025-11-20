@@ -8,6 +8,16 @@ The package is already installed as a local package. For new projects:
 composer require bites/laravel-vector-indexer
 ```
 
+### Publish Assets (Optional)
+
+```bash
+# Publish config if you need to customize settings
+php artisan vendor:publish --tag=vector-indexer-config
+
+# Publish migrations if you need to modify them
+php artisan vendor:publish --tag=vector-indexer-migrations
+```
+
 ## Setup (5 Minutes)
 
 ### 1. Configure Environment
